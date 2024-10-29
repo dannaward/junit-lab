@@ -1,11 +1,13 @@
 package com.dannaward.junitlab.junitlab.hamcrest
 
+//import org.assertj.core.api.Assertions.assertThat
 import com.dannaward.junitlab.junitlab.util.ExpectToFail
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
-//import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import java.io.BufferedWriter
+import java.io.FileWriter
 import kotlin.test.*
 
 class HamcrestTest {
@@ -121,6 +123,45 @@ class HamcrestTest {
 
     @Test
     fun floatPrecisionPassingAndIntuitive() {
+        // this is passing with better readability
         assertThat(2.32 * 3, closeTo(6.96, 0.0005))
+    }
+
+    @Test
+    fun testWithWorthlessAssertionComment() {
+        account.deposit(50)
+        // this is a worthless comment, even it's lying
+        // you can add a comment to the assertion, but showing only with codes, if possible, is the best way
+        assertThat("account balance is 100", account.balance, equalTo(50))
+    }
+
+    @Test
+    fun throwsWhenWithdrawingTooMuch() {
+        assertThrows(InsufficientFundsException::class.java) {
+            account.withdraw(100)
+        }
+    }
+
+    @Test
+    fun throwsWhenWithdrawingTooMuchOldWay() {
+        try {
+            //--- check by commenting the following line ---
+            account.withdraw(100)
+            //----------------------------------------------
+            fail()
+        } catch (expected: InsufficientFundsException) {
+            // this old way is useful when trying to check the exception message
+            assertThat(expected.message, equalTo("balance only 0"))
+        }
+    }
+
+    @Test
+    fun readsFromTestFile() {
+        val filename = "test.txt"
+        val writer = BufferedWriter(FileWriter(filename))
+        writer.write("test data")
+        writer.close()
+
+        // ...
     }
 }
