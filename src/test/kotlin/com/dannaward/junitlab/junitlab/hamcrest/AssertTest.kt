@@ -10,7 +10,7 @@ import java.io.BufferedWriter
 import java.io.FileWriter
 import kotlin.test.*
 
-class HamcrestTest {
+class AssertTest {
     class InsufficientFundsException(message: String) : RuntimeException(message)
 
     class Account(val name: String) {
