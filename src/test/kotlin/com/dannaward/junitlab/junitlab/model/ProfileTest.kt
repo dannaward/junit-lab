@@ -23,13 +23,13 @@ class ProfileTest {
     @Test
     fun matchAnswersFalseWhenMustMatchCriteriaNotMet() {
         // given
-        val profileAnswer = Answer(question, Bool.FALSE)
-
-        val criteriaAnswer = Answer(question, Bool.TRUE)
-        val criterion = Criterion(criteriaAnswer, Weight.MustMatch)
-
-        profile.add(profileAnswer)
-        criteria.add(criterion)
+        profile.add(Answer(question, Bool.FALSE))
+        criteria.add(
+            Criterion(
+                Answer(question, Bool.TRUE),
+                Weight.MustMatch
+            )
+        )
 
         // when
         val matches = profile.matches(criteria)
@@ -41,13 +41,13 @@ class ProfileTest {
     @Test
     fun matchAnswersTrueForAnyDontCareCriteria() {
         // given
-        val profileAnswer = Answer(question, Bool.FALSE)
-
-        val criteriaAnswer = Answer(question, Bool.TRUE)
-        val criterion = Criterion(criteriaAnswer, Weight.DontCare)
-
-        profile.add(profileAnswer)
-        criteria.add(criterion)
+        profile.add(Answer(question, Bool.FALSE))
+        criteria.add(
+            Criterion(
+                Answer(question, Bool.TRUE),
+                Weight.DontCare
+            )
+        )
 
         // when
         val matches = profile.matches(criteria)
