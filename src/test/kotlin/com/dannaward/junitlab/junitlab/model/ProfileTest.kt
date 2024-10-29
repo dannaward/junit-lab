@@ -55,4 +55,35 @@ class ProfileTest {
         // then
         assertTrue { matches }
     }
+
+    @Test
+    fun matches() {
+        val profile = Profile("Bull Hockey, Inc.")
+        val question = BooleanQuestion(1, "Got milk?")
+        val criteria = Criteria()
+
+        // must-match criteria not met -> false
+        profile.add(Answer(question, Bool.FALSE))
+        criteria.add(
+            Criterion(
+                Answer(question, Bool.TRUE),
+                Weight.MustMatch
+            )
+        )
+
+        assertFalse { profile.matches(criteria) }
+
+        // don't care criteria -> true
+        val criteria2 = Criteria()
+        profile.add(Answer(question, Bool.FALSE))
+        criteria2.add(
+            Criterion(
+                Answer(question, Bool.TRUE),
+                Weight.DontCare
+            )
+        )
+        assertTrue { profile.matches(criteria2) }
+
+        // this isn't good because it's not getting any benefits from test isolation that JUnit provides
+    }
 }
