@@ -1,5 +1,7 @@
 package com.dannaward.junitlab.junitlab.model
 
+import com.dannaward.junitlab.junitlab.model.criteria.Criteria
+
 
 class Profile(
     private val name: String

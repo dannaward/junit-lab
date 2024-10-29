@@ -1,7 +1,13 @@
-package com.dannaward.junitlab.junitlab.model
+package com.dannaward.junitlab.junitlab.model.question
 
-abstract class Question(private val id: Int, val text: String, private val answerChoices: Array<String>) {
-    fun getText(): String = text
+import com.dannaward.junitlab.junitlab.model.Answer
+
+abstract class Question(
+    private val id: Int,
+    private val text: String,
+    private val answerChoices: Array<String>
+) {
+    open fun getText(): String = text
 
     fun getAnswerChoice(i: Int): String = answerChoices[i]
 

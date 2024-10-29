@@ -1,6 +1,9 @@
-package com.dannaward.junitlab.junitlab.model
+package com.dannaward.junitlab.junitlab.model.criteria
 
-class Criterion<T, U>(
+import com.dannaward.junitlab.junitlab.model.Answer
+import com.dannaward.junitlab.junitlab.model.Weight
+
+class Criterion(
     private val answer: Answer,
     private val weight: Weight
 ) : Scoreable {

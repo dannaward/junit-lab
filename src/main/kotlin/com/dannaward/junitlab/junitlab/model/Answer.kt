@@ -1,5 +1,7 @@
 package com.dannaward.junitlab.junitlab.model
 
+import com.dannaward.junitlab.junitlab.model.question.Question
+
 class Answer {
     private var i: Int
     private var question: Question
