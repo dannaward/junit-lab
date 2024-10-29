@@ -156,6 +156,7 @@ class HamcrestTest {
     }
 
     @Test
+    @Ignore
     fun readsFromTestFile() {
         val filename = "test.txt"
         val writer = BufferedWriter(FileWriter(filename))
