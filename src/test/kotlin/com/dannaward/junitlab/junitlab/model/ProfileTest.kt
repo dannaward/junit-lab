@@ -1,5 +1,6 @@
 package com.dannaward.junitlab.junitlab.model
 
+import com.dannaward.junitlab.junitlab.model.answer.Answer
 import com.dannaward.junitlab.junitlab.model.criteria.Criteria
 import com.dannaward.junitlab.junitlab.model.criteria.Criterion
 import com.dannaward.junitlab.junitlab.model.question.BooleanQuestion

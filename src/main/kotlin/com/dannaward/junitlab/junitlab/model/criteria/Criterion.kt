@@ -1,7 +1,7 @@
 package com.dannaward.junitlab.junitlab.model.criteria
 
-import com.dannaward.junitlab.junitlab.model.Answer
 import com.dannaward.junitlab.junitlab.model.Weight
+import com.dannaward.junitlab.junitlab.model.answer.Answer
 
 class Criterion(
     private val answer: Answer,

@@ -1,6 +1,6 @@
 package com.dannaward.junitlab.junitlab.model.question
 
-import com.dannaward.junitlab.junitlab.model.Answer
+import com.dannaward.junitlab.junitlab.model.answer.Answer
 
 abstract class Question(
     private val id: Int,

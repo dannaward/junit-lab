@@ -1,4 +1,4 @@
-package com.dannaward.junitlab.junitlab.model
+package com.dannaward.junitlab.junitlab.model.answer
 
 import com.dannaward.junitlab.junitlab.model.question.Question
 
