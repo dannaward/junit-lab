@@ -9,25 +9,41 @@ import java.util.concurrent.atomic.AtomicInteger
 class StatCompiler {
     private val controller = QuestionController()
 
-    fun responsesByQuestion(
-        answers: List<BooleanAnswer>
-    ): Map<String, Map<Boolean, AtomicInteger>> {
-        val responses = mutableMapOf<Int, Map<Boolean, AtomicInteger>>()
-        answers.forEach {
-            incrementHistogram(responses, it)
+    fun questionText(answers: List<BooleanAnswer>): Map<Int, String> {
+        val questions: MutableMap<Int, String> = HashMap()
+        answers.stream().forEach { answer: BooleanAnswer ->
+            if (!questions.containsKey(answer.questionId)) questions[answer.questionId] =
+                controller.find(answer.questionId).getText()
         }
-        return convertHistogramIdsToText(responses)
+        return questions
+    }
+
+    fun responsesByQuestion(
+        answers: List<BooleanAnswer?>, questions: Map<Int, String>
+    ): Map<String, Map<Boolean, AtomicInteger>> {
+        val responses: MutableMap<Int, Map<Boolean, AtomicInteger>> = HashMap()
+        answers.stream().forEach { answer: BooleanAnswer? ->
+            incrementHistogram(
+                responses,
+                answer!!
+            )
+        }
+        return convertHistogramIdsToText(responses, questions)
     }
 
     private fun convertHistogramIdsToText(
-        responses: Map<Int, Map<Boolean, AtomicInteger>>
+        responses: Map<Int, Map<Boolean, AtomicInteger>>,
+        questions: Map<Int, String>
     ): Map<String, Map<Boolean, AtomicInteger>> {
         val textResponses = mutableMapOf<String, Map<Boolean, AtomicInteger>>()
-        responses.keys.forEach {
-            textResponses[controller.find(it).getText()] = responses[it]!!
+        responses.keys.forEach { id ->
+            questions[id]?.let { questionText ->
+                textResponses[questionText] = responses[id]!!
+            }
         }
         return textResponses
     }
+
 
     private fun incrementHistogram(
         responses: MutableMap<Int, Map<Boolean, AtomicInteger>>,
